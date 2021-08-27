@@ -35,8 +35,8 @@ function newSome(array, callback) {
 
 function newFind(array, callback) {
     for(let index = 0; index < array.length; index++){
-        if(callback(array[i], index, array) === true){
-            return array[i];
+        if(callback(array[index], index, array) === true){
+            return array[index];
         }
     }
     return undefined;
