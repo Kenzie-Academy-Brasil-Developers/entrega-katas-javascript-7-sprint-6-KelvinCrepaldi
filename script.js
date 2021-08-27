@@ -2,92 +2,103 @@ let test = [1, 2, 3, 4, 5]
 
 function newForEach(array, callback) {
     for(let index = 0; index < array.length; index++){
-        const currentValue = array[index]
-        callback(currentValue, index, array)
+        const currentValue = array[index];
+        callback(currentValue, index, array);
     }
 }
 
 function newFill(array, valor, inicio=0, fim=array.length) {
-    for(let i = inicio; i<fim; i++){
-        array[i] = valor
+    for(let index = inicio; index < fim; index++){
+        array[index] = valor;
     }
-    return array
+    return array;
 }
 
 function newMap(array, callback) {
-    let newArray = []
-    for(let i = 0; i < array.length; i++){
-        newArray.push(callback(array[i]))
+    let newArray = [];
+    for(let index = 0; index < array.length; i++){
+        const currentValue = array[index];
+        newArray.push(callback(array[index]));
     }
-    return newArray
+    return newArray;
 }
 
 function newSome(array, callback) {
-    for(let i = 0; i < array.length; i++){
-        if(callback(array[i]) === true){
-            return true
+    for(let index = 0; index < array.length; index++){
+        const currentValue = array[index];
+        if(callback(currentValue, index, array) === true){
+            return true;
         }
     }
-    return false
+    return false;
 }
 
 function newFind(array, callback) {
-    for(let i = 0; i < array.length; i++){
-        if(callback(array[i]) === true){
-            return array[i]
+    for(let index = 0; index < array.length; index++){
+        if(callback(array[i], index, array) === true){
+            return array[i];
         }
     }
-    return undefined
+    return undefined;
 }
 
 function newFindIndex(array, callback) {
-    for(let i = 0; i < array.length; i++){
-        if(callback(array[i]) === true){
-            return i
+    for(let index = 0; index < array.length; index++){
+        const element = array[index];
+        if(callback(element, index, array) === true){
+            return index;
         }
     }
-    return -1
+    return -1;
 }
 
 function newEvery(array, callback) {
-    for(let i = 0; i < array.length; i++){
-        if(callback(array[i]) === false){
-            return false
+    for(let index = 0; index < array.length; index++){
+        const currentValue = array[index];
+        if(callback(currentValue, index, array) === false){
+            return false;
         }
     }
-    return true
+    return true;
 }
 
 function newFilter(array, callback) {
-    let newArray = []
-    for(let i = 0; i < array.length; i++){
-        if(callback(array[i]) === true){
-            newArray.push(array[i])
+    let newArray = [];
+    for(let index = 0; index < array.length; index++){
+        const element = array[index];
+        if(callback(element, index, array) === true){
+            newArray.push(element);
         }
     }
-    return newArray
+    return newArray;
 }
 
 function newConcat(arrayX, arrayY) {
-    for(const i in arrayY){
-        arrayX.push(arrayY[i])
+    for(const index in arrayY){
+        const element = arrayY[index];
+        arrayX.push(element);
     }
-    return arrayX 
+    return arrayX ;
 }
 
 function newIncludes(array, element, fromIndex = 0) {
-    for(let i = fromIndex; i < array.length; i++){
-        if(array[i] === element){
-            return true
+    for(let index = fromIndex; index < array.length; index++){
+        const currentValue = array[index];
+        if(currentValue === element){
+            return true;
         }
     }
-    return false
+    return false;
 }
 
 function newIndexOf(array, element, fromIndex = 0) {
-    for(let i = fromIndex; i < array.length; i++){
-        if(array[i] === element){
-            return i
+    if(fromIndex < 0){
+        fromIndex = array.length - Math.abs(fromIndex);
+    }
+    for(let index = fromIndex; index < array.length; index++){
+        const currentElement = array[index];
+        if(currentElement === element){
+            return index;
         }
     }
     return -1
@@ -95,18 +106,24 @@ function newIndexOf(array, element, fromIndex = 0) {
 
 function newJoin(array, separator) {
     let newString = ''
-    for(let i = 0; i < array.length-1; i++){
-        newString += `${array[i]}${separator}`
+    for(let index = 0; index < array.length-1; index++){
+        newString += `${array[index]}${separator}`
     }
     newString += `${array[array.length-1]}`
     return newString
 }
 
-function newReduce(array, callback) {
-    let result = array[0]
-    for(let i = 1; i < array.length; i++){
-        result = callback(result, array[i])
+function newReduce(array, callback, valorInicial) {
+    let acumulador = array[0];
+    let index = 1;
+    if(valorInicial !== undefined){
+        acumulador = valorInicial;
+        index = 0;
     }
-    return result
+    for(index; index < array.length; index++){
+        let valorAtual = array[index];
+        acumulador = callback(acumulador, valorAtual, index, array);
+    }
+    return acumulador;
 }
 
