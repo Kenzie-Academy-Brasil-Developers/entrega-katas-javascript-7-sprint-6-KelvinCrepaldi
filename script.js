@@ -18,7 +18,7 @@ function newMap(array, callback) {
     let newArray = [];
     for(let index = 0; index < array.length; i++){
         const currentValue = array[index];
-        newArray.push(callback(array[index]));
+        newArray.push(callback(currentValue, index, array));
     }
     return newArray;
 }
