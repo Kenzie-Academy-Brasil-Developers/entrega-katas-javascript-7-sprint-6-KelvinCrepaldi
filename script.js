@@ -16,7 +16,7 @@ function newFill(array, valor, inicio=0, fim=array.length) {
 
 function newMap(array, callback) {
     let newArray = [];
-    for(let index = 0; index < array.length; i++){
+    for(let index = 0; index < array.length; index++){
         const currentValue = array[index];
         newArray.push(callback(currentValue, index, array));
     }
